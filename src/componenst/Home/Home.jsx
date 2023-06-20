@@ -8,9 +8,10 @@ const Home = () => {
     const tshirts = useLoaderData();
     const [cart, setCart] = useState([]);
     const handleAddToCart = tshirt => {
-        console.log(tshirt)
+       const newCart = [...cart, tshirt];
+       setCart(newCart);
     }
-    console.log(tshirts)
+     
     return (
         <div className='home-container'>
           <div className='t-shirts-container'>
@@ -19,12 +20,14 @@ const Home = () => {
                 tshirts.map(tshirt => <TShirt
                 key={tshirt._id}
                 tshirt={tshirt}
-                handleAddToCart={handleAddToCart}
+                handleAddToCart={()=> handleAddToCart(tshirt)}
                 ></TShirt> )
             }
           </div>
           <div className='cart-container'>
-            <Cart></Cart>
+            <Cart
+            cart = {cart}
+            ></Cart>
           </div>
         </div>
     
